@@ -12,7 +12,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 import java.util.Map;
 
 /**
@@ -56,6 +55,12 @@ public class UserController {
         request.getSession().setAttribute("user",user.getId());
 
         return R.success(user);
+    }
+
+    @PostMapping("logout")
+    public R<String> logout(HttpServletRequest request){
+        request.getSession().removeAttribute("user");
+        return R.success("退出成功！");
     }
 
 }
