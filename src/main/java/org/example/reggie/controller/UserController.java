@@ -29,6 +29,12 @@ public class UserController {
     @Autowired
     private UserService userService;
 
+    /**
+     * 用户登录
+     * @param request
+     * @param map
+     * @return
+     */
     @PostMapping("/login")
     public R<User> login(HttpServletRequest request, @RequestBody Map map){
 
@@ -57,6 +63,11 @@ public class UserController {
         return R.success(user);
     }
 
+    /**
+     * 用户退出
+     * @param request
+     * @return
+     */
     @PostMapping("logout")
     public R<String> logout(HttpServletRequest request){
         request.getSession().removeAttribute("user");
