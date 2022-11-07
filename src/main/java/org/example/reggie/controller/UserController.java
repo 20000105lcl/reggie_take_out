@@ -37,19 +37,15 @@ public class UserController {
      */
     @PostMapping("/login")
     public R<User> login(HttpServletRequest request, @RequestBody Map map){
-
         log.info("map={}",map);
-
         String phone = (String) map.get("phone");
         //先判断该用户是否是新用户，是-自动注册该用户，否-直接登录
-
         //1、条件查询
         LambdaQueryWrapper<User> queryWrapper = new LambdaQueryWrapper<User>();
         //1.1、添加手机号的条件
         queryWrapper.eq(User::getPhone,phone);
         //查询
         User user = userService.getOne(queryWrapper);
-
         //判断是否是新用户
         if (user==null){
             //注册新用户
@@ -57,9 +53,7 @@ public class UserController {
             user.setPhone(phone);
             userService.save(user);
         }
-
         request.getSession().setAttribute("user",user.getId());
-
         return R.success(user);
     }
 
